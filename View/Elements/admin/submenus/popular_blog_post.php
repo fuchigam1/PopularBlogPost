@@ -30,3 +30,42 @@ $menuList = Configure::read('BcApp.adminNavi.'. Inflector::underscore($this->plu
 		</ul>
 	</td>
 </tr>
+<?php if ($this->request->params['controller'] == 'popular_blog_posts'): ?>
+<tr>
+	<th>データメンテナンス</th>
+	<td>
+<script type="text/javascript">
+$(function(){
+	/**
+	 * 検索時の正規表現利用チェック時の操作
+	 */
+	checkDeleteAllDataHandler();
+	$('#CheckDeleteAllData, label[for=CheckDeleteAllData]').on('click', function(){
+		checkDeleteAllDataHandler();
+	});
+
+	function checkDeleteAllDataHandler() {
+		if ($('#CheckDeleteAllData').prop('checked')) {
+			$('.delete-all-data-link').animate({opacity: 'show'}, 'slow');
+		} else {
+			$('.delete-all-data-link').animate({opacity: 'hide'}, 'fast');
+		}
+	}
+});
+</script>
+		<ul>
+			<li>
+				<label for="CheckDeleteAllData">
+					<input type="checkbox" label="データをリセットするにはチェックを入れてください" id="CheckDeleteAllData">データをリセットするにはチェックを入れてください
+				</label>
+				&nbsp;&nbsp;&nbsp;&nbsp;
+				<span class="delete-all-data-link" style="display: none;">
+				<?php $this->BcBaser->link('全てのアクセスデータを削除する',
+					array('admin' => true, 'plugin' => 'popular_blog_post', 'controller' => 'popular_blog_posts', 'action' => 'delete_all'),
+					array('title' => '全てのアクセスデータを削除する', 'style' => 'color: #C00;'), "全てのアクセスデータを削除します。\n本当によろしいですか？", false); ?>
+				</span>
+			</li>
+		</ul>
+	</td>
+</tr>
+<?php endif ?>

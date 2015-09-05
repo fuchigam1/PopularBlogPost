@@ -105,6 +105,39 @@ class PopularBlogPostsController extends PopularBlogPostAppController
 	}
 
 	/**
+	 * [ADMIN] 全てのアクセスデータの削除
+	 * 
+	 */
+	public function admin_delete_all()
+	{
+		$hasDeleteError = array();
+		$datas = $this->{$this->modelClass}->find('all', array('recursive' => -1));
+		if ($datas) {
+			foreach ($datas as $data) {
+				if (!$this->{$this->modelClass}->delete($data[$this->modelClass]['id'])) {
+					$hasDeleteError[] = $data[$this->modelClass]['id'];
+				}
+			}
+		} else {
+			$this->setMessage('削除可能なデータがありませんでした。', true);
+			$this->redirect(array('action' => 'index'));
+		}
+
+		$message = '';
+		if ($hasDeleteError) {
+			$message = 'データベース処理中にエラーが発生しました。';
+			$errorId = implode(', ', $hasDeleteError);
+			$message .= $message .'<br />削除に失敗したID: '. $errorId;
+			$this->setMessage($message, true);
+		} else {
+			$message = '全てのアクセスカウントデータを削除しました。';
+			$this->setMessage($message);
+		}
+
+		$this->redirect(array('action' => 'index'));
+	}
+
+	/**
 	 * 一覧用の検索条件を生成する
 	 *
 	 * @param array $data
