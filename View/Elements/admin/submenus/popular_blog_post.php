@@ -7,13 +7,26 @@
  * @package			PopularBlogPost
  * @license			MIT
  */
+$menuList = Configure::read('BcApp.adminNavi.'. Inflector::underscore($this->plugin));
 ?>
 <tr>
-	<th>ポピュラーブログポスト設定管理メニュー</th>
+	<th><?php echo $menuList['name'] ?>メニュー</th>
 	<td>
 		<ul>
-			<li><?php $this->BcBaser->link('ランキング確認', array('admin' => true, 'plugin' => 'popular_blog_post', 'controller' => 'popular_blog_posts', 'action'=>'index')) ?></li>
-			<li><?php $this->BcBaser->link('ポピュラーブログポスト設定一覧', array('admin' => true, 'plugin' => 'popular_blog_post', 'controller' => 'popular_blog_post_configs', 'action'=>'index')) ?></li>
+<?php foreach ($menuList['contents'] as $menu): ?>
+			<?php if(is_array($menu['url'])): ?>
+			<li><?php $this->BcBaser->link($menu['name'],
+					array(
+						'admin' => $menu['url']['admin'],
+						'plugin' => $menu['url']['plugin'],
+						'controller' => $menu['url']['controller'],
+						'action' => $menu['url']['action']
+				)) ?>
+			</li>
+			<?php else: ?>
+			<li><?php $this->BcBaser->link($menu['name'], $menu['url']) ?></li>
+			<?php endif ?>
+<?php endforeach ?>
 		</ul>
 	</td>
 </tr>
