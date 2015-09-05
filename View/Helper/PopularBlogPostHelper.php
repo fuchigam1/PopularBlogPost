@@ -33,4 +33,55 @@ class PopularBlogPostHelper extends AppHelper
 		return $allowPublish;
 	}
 
+	/**
+	 * 記事ランキングデータを取得する
+	 * 
+	 * @param int $blogContentId
+	 * @param array $options
+	 * @return array
+	 */
+	public function getPopularData($blogContentId = '', $options = array()) {
+		if (ClassRegistry::isKeySet('PopularBlogPost.PopularBlogPost')) {
+			$PopularBlogPost = ClassRegistry::getObject('PopularBlogPost.PopularBlogPost');
+		} else {
+			$PopularBlogPost = ClassRegistry::init('PopularBlogPost.PopularBlogPost');
+		}
+
+		$_options = array(
+			'limit' => 5,
+			'order' => 'DESC',
+		);
+		$options = Hash::merge($_options, $options);
+
+		$conditions = array(
+			'limit' => $options['limit'],
+			'order' => 'PopularBlogPost.view_count '. $options['order'],
+		);
+
+		if ($blogContentId) {
+			$conditions = Hash::merge($conditions, array(
+				'conditions' => array(
+					'PopularBlogPost.blog_content_id' => $blogContentId,
+				),
+			));
+		}
+
+		$datas = $PopularBlogPost->find('all', $conditions);
+		return $datas;
+	}
+
+	/**
+	 * 文字列をチェックして数値型に変換する
+	 * 
+	 * @param string $num
+	 * @return int
+	 */
+	public function convertNumeric($num) {
+		$num = mb_convert_kana($num, 'a');
+		if (!is_numeric($num)) {
+			return '';
+		}
+		return $num;
+	}
+
 }
