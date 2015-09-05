@@ -26,6 +26,13 @@ $config['BcApp.adminNavi.popular_blog_post'] = array(
 					'plugin' => 'popular_blog_post',
 					'controller' => 'popular_blog_post_configs',
 					'action' => 'index')
+			),
+			array('name' => 'README',
+				'url' => array(
+					'admin' => true,
+					'plugin' => 'popular_blog_post',
+					'controller' => 'popular_blog_posts',
+					'action' => 'readme')
 			)
 	)
 );
