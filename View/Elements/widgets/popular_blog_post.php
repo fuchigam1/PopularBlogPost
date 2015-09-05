@@ -40,7 +40,7 @@ if (isset($this->Blog)) {
 <?php if ($datas): ?>
 	<ul>
 		<?php foreach ($datas as $post): ?>
-			<?php $postLink = $BlogHelper->getPostLinkUrl($post) ?>
+			<?php $postLink = preg_replace('/^\//', '', $BlogHelper->getPostLinkUrl($post)) ?>
 			<?php if ($this->request->url == $postLink): ?>
 				<?php $class = ' class="current"' ?>
 			<?php else: ?>
