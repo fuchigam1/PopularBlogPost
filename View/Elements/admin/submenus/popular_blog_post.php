@@ -30,7 +30,7 @@ $menuList = Configure::read('BcApp.adminNavi.'. Inflector::underscore($this->plu
 		</ul>
 	</td>
 </tr>
-<?php if ($this->request->params['controller'] == 'popular_blog_posts'): ?>
+<?php if ($this->request->params['controller'] == 'popular_blog_posts' && $this->request->params['action'] == 'index'): ?>
 <tr>
 	<th>データメンテナンス</th>
 	<td>
