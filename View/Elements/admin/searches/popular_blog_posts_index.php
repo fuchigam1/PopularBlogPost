@@ -10,17 +10,23 @@
 ?>
 <script type="text/javascript">
 $(function(){
-	$("#PopularBlogPostUpdateDateBegin").change(function(){
-		if ($("#PopularBlogPostUpdateDateBegin").val()) {
+	$("#PopularBlogPostUpdateDateBeginDate").change(function(){
+		if ($("#PopularBlogPostUpdateDateBeginDate").val()) {
 			// 開始日を入力したら、終了日欄に指定月の末尾を設定する
-			var date = new Date($("#PopularBlogPostUpdateDateBegin").val());
+			var date = new Date($("#PopularBlogPostUpdateDateBeginDate").val());
 			var year = date.getFullYear();
 			var month = add0(date.getMonth() + 1);
 			var day = add0(date.getDate());
+
+			var updateBeginTime = '00:00:00';
+			$("#PopularBlogPostUpdateDateBeginTime").val(updateBeginTime);
+
 			// var targetDate = year + '/' + month + '/' + day;
 			var monthEndDay = getMonthEndDay(year, month);
 			var monthEndDate = year + '/' + month + '/' + monthEndDay;
-			$("#PopularBlogPostUpdateDateEnd").val(monthEndDate);
+			$("#PopularBlogPostUpdateDateEndDate").val(monthEndDate);
+			var updateEndTime = '23:59:59';
+			$("#PopularBlogPostUpdateDateEndTime").val(updateEndTime);
 		}
 	});
 
@@ -57,8 +63,8 @@ $(function(){
 	</span>
 	&nbsp;&nbsp;&nbsp;&nbsp;
 	<span><?php echo $this->BcForm->label('PopularBlogPost.update_date_begin', '期間') ?></span>
-		<?php echo $this->BcForm->datePicker('PopularBlogPost.update_date_begin', array('size' => 12)) ?> 〜 
-		<?php echo $this->BcForm->datePicker('PopularBlogPost.update_date_end', array('size' => 12)) ?>
+		<?php echo $this->BcForm->dateTimePicker('PopularBlogPost.update_date_begin', array('size' => 12), true) ?> 〜 
+		<?php echo $this->BcForm->dateTimePicker('PopularBlogPost.update_date_end', array('size' => 12), true) ?>
 </p>
 <div class="button">
 	<?php $this->BcBaser->link($this->BcBaser->getImg('admin/btn_search.png', array('alt' => '検索', 'class' => 'btn')), "javascript:void(0)", array('id' => 'BtnSearchSubmit')) ?> 

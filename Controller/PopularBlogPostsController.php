@@ -114,15 +114,36 @@ class PopularBlogPostsController extends PopularBlogPostAppController
 	{
 		$conditions = array();
 		$blogContentId = '';
+		$beginDateTime = '';
+		$endDateTime = '';
 
 		if (isset($data[$this->modelClass]['blog_content_id'])) {
 			$blogContentId = $data[$this->modelClass]['blog_content_id'];
 		}
+
+		if (!empty($data[$this->modelClass]['update_date_begin_date'])) {
+			$beginDateTime = $data[$this->modelClass]['update_date_begin_date'];
+		}
+		if (!empty($data[$this->modelClass]['update_date_begin_time'])) {
+			$beginDateTime = $beginDateTime .' '. $data[$this->modelClass]['update_date_begin_time'];
+		}
+
+		if (!empty($data[$this->modelClass]['update_date_end_date'])) {
+			$endDateTime = $data[$this->modelClass]['update_date_end_date'];
+		}
+		if (!empty($data[$this->modelClass]['update_date_end_time'])) {
+			$endDateTime = $endDateTime .' '. $data[$this->modelClass]['update_date_end_time'];
+		}
+
 		if (!empty($data[$this->modelClass]['update_date_begin'])) {
-			$conditions['PopularBlogPost.update_date >='] = $data[$this->modelClass]['update_date_begin'];
+			if ($beginDateTime) {
+				$conditions['PopularBlogPost.update_date >='] = $beginDateTime;
+			}
 		}
 		if (!empty($data[$this->modelClass]['update_date_end'])) {
-			$conditions['PopularBlogPost.update_date <='] = $data[$this->modelClass]['update_date_end'];
+			if ($endDateTime) {
+				$conditions['PopularBlogPost.update_date <='] = $endDateTime;
+			}
 		}
 
 		unset($data['_Token']);
@@ -130,6 +151,10 @@ class PopularBlogPostsController extends PopularBlogPostAppController
 		unset($data[$this->modelClass]['blog_content_id']);
 		unset($data[$this->modelClass]['update_date_begin']);
 		unset($data[$this->modelClass]['update_date_end']);
+		unset($data[$this->modelClass]['update_date_begin_date']);
+		unset($data[$this->modelClass]['update_date_end_date']);
+		unset($data[$this->modelClass]['update_date_begin_time']);
+		unset($data[$this->modelClass]['update_date_end_time']);
 
 		// 条件指定のないフィールドを解除
 		foreach($data[$this->modelClass] as $key => $value) {
