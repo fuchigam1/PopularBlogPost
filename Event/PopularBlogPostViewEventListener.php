@@ -113,12 +113,11 @@ class PopularBlogPostViewEventListener extends BcViewEventListener
 	 */
 	private function hasPopularBlogPostConfig($View)
 	{
-		$this->setUpModel();
-
 		if (!isset($View->viewVars['blogContent'])) {
 			return false;
 		}
 
+		$this->setUpModel();
 		$data = $this->PopularBlogPostConfigModel->find('first', array(
 			'conditions' => array(
 				'PopularBlogPostConfig.id' => $View->viewVars['blogContent']['BlogContent']['id']

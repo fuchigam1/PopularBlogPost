@@ -70,6 +70,7 @@ class PopularBlogPostConfigsController extends PopularBlogPostAppController
 	public function admin_edit($id = null)
 	{
 		$this->pageTitle = $this->adminTitle . '編集';
+		$this->help = 'popular_blog_post_configs_index';
 		parent::admin_edit($id);
 	}
 
