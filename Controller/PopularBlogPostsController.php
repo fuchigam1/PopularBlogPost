@@ -22,7 +22,7 @@ class PopularBlogPostsController extends PopularBlogPostAppController
 	 * 
 	 * @var array
 	 */
-	public $uses = array('PopularBlogPost.PopularBlogPost', 'PopularBlogPost.PopularBlogPostConfig');
+	public $uses = array('PopularBlogPost.PopularBlogPost');
 
 	/**
 	 * ぱんくずナビ
