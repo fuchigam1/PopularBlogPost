@@ -55,7 +55,7 @@ $(function(){
 </script>
 		<ul>
 			<li>
-				<label for="CheckDeleteAllData">
+				<label for="CheckDeleteAllData" style="cursor: pointer;">
 					<input type="checkbox" label="データをリセットするにはチェックを入れてください" id="CheckDeleteAllData">データをリセットするにはチェックを入れてください
 				</label>
 				&nbsp;&nbsp;&nbsp;&nbsp;
