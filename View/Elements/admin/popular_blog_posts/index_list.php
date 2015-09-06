@@ -13,7 +13,16 @@
 
 <table cellpadding="0" cellspacing="0" class="list-table sort-table" id="ListTable">
 	<thead>
-		<tr><th style="width: 90px;">操作</th>
+		<tr>
+			<th class="list-tool">
+				<?php if ($this->BcBaser->isAdminUser()): ?>
+				<div>
+					<?php echo $this->BcForm->checkbox('ListTool.checkall', array('title' => '一括選択')) ?>
+					<?php echo $this->BcForm->input('ListTool.batch', array('type' => 'select', 'options' => array('del' => '削除'), 'empty' => '一括処理')) ?>
+					<?php echo $this->BcForm->button('適用', array('id' => 'BtnApplyBatch', 'disabled' => 'disabled')) ?>
+				</div>
+				<?php endif ?>
+			</th>
 			<th><?php echo $this->Paginator->sort('id', array(
 					'asc' => $this->BcBaser->getImg('admin/blt_list_down.png', array('alt' => '昇順', 'title' => '昇順')).' NO',
 					'desc' => $this->BcBaser->getImg('admin/blt_list_up.png', array('alt' => '降順', 'title' => '降順')).' NO'),

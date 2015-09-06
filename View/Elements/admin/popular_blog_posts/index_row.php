@@ -10,6 +10,9 @@
 ?>
 <tr>
 	<td class="row-tools">
+	<?php if ($this->BcBaser->isAdminUser()): ?>
+		<?php echo $this->BcForm->checkbox('ListTool.batch_targets.' . $data['PopularBlogPost']['id'], array('type' => 'checkbox', 'class' => 'batch-targets', 'value' => $data['PopularBlogPost']['id'])) ?>
+	<?php endif ?>
 	<?php $this->BcBaser->link($this->BcBaser->getImg('admin/icn_tool_unpublish.png', array('width' => 24, 'height' => 24, 'alt' => '無効', 'class' => 'btn')),
 			array('action' => 'ajax_unpublish', $data['PopularBlogPost']['id']), array('title' => '無効', 'class' => 'btn-unpublish')) ?>
 	<?php $this->BcBaser->link($this->BcBaser->getImg('admin/icn_tool_publish.png', array('width' => 24, 'height' => 24, 'alt' => '有効', 'class' => 'btn')),

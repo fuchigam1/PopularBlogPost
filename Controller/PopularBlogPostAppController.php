@@ -202,6 +202,22 @@ class PopularBlogPostAppController extends BcPluginAppController
 	}
 
 	/**
+	 * 一括削除
+	 * 
+	 * @param array $ids
+	 * @return boolean
+	 */
+	protected function _batch_del($ids)
+	{
+		if ($ids) {
+			foreach ($ids as $id) {
+				$this->_delete($id);
+			}
+		}
+		return true;
+	}
+
+	/**
 	 * [ADMIN] 無効状態にする
 	 * 
 	 * @param int $id
