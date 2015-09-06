@@ -69,3 +69,16 @@ $(function(){
 	</td>
 </tr>
 <?php endif ?>
+<?php if (BcUtil::isAdminUser()): ?>
+<tr>
+	<th>このプラグインについて</th>
+	<td>
+		<ul>
+			<li><?php $this->BcBaser->link('README',
+					array('admin' => true, 'plugin' => 'popular_blog_post', 'controller' => 'popular_blog_posts', 'action' => 'readme')); ?></li>
+			<li><?php $this->BcBaser->link('VERSION',
+					array('admin' => true, 'plugin' => 'popular_blog_post', 'controller' => 'popular_blog_posts', 'action' => 'readme', 'version')); ?></li>
+		</ul>
+	</td>
+</tr>
+<?php endif ?>

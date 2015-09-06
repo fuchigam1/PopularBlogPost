@@ -8,15 +8,12 @@
  * @license			MIT
  */
 ?>
-<style type="text/css">
-	#ReadMe {
-//		height: 340px;
-		overflow: scroll;
-	}
-</style>
-
 <?php if(!empty($text)): ?>
 <div id="ReadMe">
-	<?php echo $this->{$this->plugin}->transformMarkDown($text) ?>
+	<?php if (!$this->passedArgs): ?>
+		<?php echo $this->{$this->plugin}->transformMarkDown($text) ?>
+	<?php else: ?>
+		<?php echo nl2br($text) ?>
+	<?php endif ?>
 </div>
 <?php endif ?>

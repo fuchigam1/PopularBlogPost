@@ -320,4 +320,36 @@ class PopularBlogPostAppController extends BcPluginAppController
 		}
 	}
 
+	/**
+	 * [ADMIN] README
+	 * 
+	 * @param string $args
+	 */
+	public function admin_readme($args = '') {
+		$this->pageTitle = $this->adminTitle . ' README';
+		
+		if (!$args) {
+			$file = App::pluginPath($this->plugin) .'README.md';
+		} else {
+			switch ($args) {
+				case 'version':
+					$this->pageTitle = $this->adminTitle . ' VERSION';
+					$file = App::pluginPath($this->plugin) .'VERSION.txt';
+					break;
+				default:
+					$file = App::pluginPath($this->plugin) .'VERSION.txt';
+					break;
+			}
+		}
+
+		$File = new File($file);
+		$text = $File->read();
+		if (!$text) {
+			$message = 'ファイルの内容が取得できません。';
+			$this->setMessage($message, true);
+		}
+
+		$this->set('text', $text);
+	}
+
 }

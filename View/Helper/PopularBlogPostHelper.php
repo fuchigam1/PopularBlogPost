@@ -84,8 +84,14 @@ class PopularBlogPostHelper extends AppHelper
 		return $num;
 	}
 
+	/**
+	 * テキストをMarkdown形式に変換する
+	 * 
+	 * @param string $text
+	 * @return string
+	 */
 	public function transformMarkDown($text) {
-		App::import('Vendor', 'PopularBlogPost.Parsedown');
+		App::import('Vendor', $this->plugin .'.Parsedown');
 		$Parsedown = new Parsedown();
 		$result = $Parsedown->text($text);
 		return $result;
