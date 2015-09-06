@@ -211,4 +211,20 @@ class PopularBlogPostsController extends PopularBlogPostAppController
 		}
 	}
 
+	/**
+	 * [ADMIN] README
+	 * 
+	 */
+	public function admin_readme() {
+		$this->pageTitle = $this->adminTitle . 'README';
+		$file = App::pluginPath($this->plugin) .'README.md';
+		$File = new File($file);
+		$text = $File->read();
+		if (!$text) {
+			$message = 'ファイルの内容が取得できません。';
+			$this->setMessage($message, true);
+		}
+		$this->set('text', $text);
+	}
+
 }

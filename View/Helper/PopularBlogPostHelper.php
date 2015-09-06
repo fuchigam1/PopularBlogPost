@@ -84,4 +84,11 @@ class PopularBlogPostHelper extends AppHelper
 		return $num;
 	}
 
+	public function transformMarkDown($text) {
+		App::import('Vendor', 'PopularBlogPost.Parsedown');
+		$Parsedown = new Parsedown();
+		$result = $Parsedown->text($text);
+		return $result;
+	}
+
 }
