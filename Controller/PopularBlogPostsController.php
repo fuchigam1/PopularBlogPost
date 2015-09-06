@@ -169,15 +169,11 @@ class PopularBlogPostsController extends PopularBlogPostAppController
 			$endDateTime = $endDateTime .' '. $data[$this->modelClass]['update_date_end_time'];
 		}
 
-		if (!empty($data[$this->modelClass]['update_date_begin'])) {
-			if ($beginDateTime) {
-				$conditions['PopularBlogPost.update_date >='] = $beginDateTime;
-			}
+		if ($beginDateTime) {
+			$conditions['PopularBlogPost.update_date >='] = $beginDateTime;
 		}
-		if (!empty($data[$this->modelClass]['update_date_end'])) {
-			if ($endDateTime) {
-				$conditions['PopularBlogPost.update_date <='] = $endDateTime;
-			}
+		if ($endDateTime) {
+			$conditions['PopularBlogPost.update_date <='] = $endDateTime;
 		}
 
 		unset($data['_Token']);
