@@ -194,7 +194,7 @@ class PopularBlogPostAppController extends BcPluginAppController
 		$data = $this->{$this->modelClass}->read(null, $id);
 		// 削除実行
 		if ($this->{$this->modelClass}->delete($id)) {
-			$this->{$this->modelClass}->saveDbLog($data[$this->modelClass]['id'] .' を削除しました。');
+			$this->{$this->modelClass}->saveDbLog($this->adminTitle .' ID: '. $data[$this->modelClass]['id'] .' を削除しました。');
 			return true;
 		} else {
 			return false;
