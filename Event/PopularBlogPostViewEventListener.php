@@ -87,18 +87,18 @@ class PopularBlogPostViewEventListener extends BcViewEventListener
 	 */
 	private function isSingleAccess($View)
 	{
-		if (isset($View->viewVars['preview']) && $View->viewVars['preview']) {
+		if (Hash::get($View->viewVars, 'preview')) {
 			return false;
 		}
 
-		if (!isset($View->viewVars['single']) || !$View->viewVars['single']) {
+		if (!Hash::get($View->viewVars, 'single')) {
 			return false;
 		}
 
-		if ($View->request->params['action'] != 'archives') {
+		if (Hash::get($View->request->params, 'action') != 'archives') {
 			return false;
 		}
-		if (empty($View->request->params['pass']) || !is_numeric($View->request->params['pass'][0])) {
+		if (!Hash::get($View->request->params, 'pass') || !is_numeric($View->request->params['pass'][0])) {
 			return false;
 		}
 
@@ -113,7 +113,7 @@ class PopularBlogPostViewEventListener extends BcViewEventListener
 	 */
 	private function hasPopularBlogPostConfig($View)
 	{
-		if (!isset($View->viewVars['blogContent'])) {
+		if (!Hash::get($View->viewVars, 'blogContent')) {
 			return false;
 		}
 
@@ -148,7 +148,7 @@ class PopularBlogPostViewEventListener extends BcViewEventListener
 			return false;
 		}
 		
-		if (isset($View->viewVars['user']) && !empty($View->viewVars['user']['id'])) {
+		if (Hash::get($View->viewVars, 'user') && Hash::get($View->viewVars, 'user.id')) {
 			if ($this->popularBlogPostConfig['exclude_admin']) {
 				return false;
 			}
@@ -186,7 +186,9 @@ class PopularBlogPostViewEventListener extends BcViewEventListener
 		} else {
 			$BlogPostModel = ClassRegistry::init('BlogPost');
 		}
-		$BlogPostModel->{$this->pluginModelName}->save($saveData, array('validate' => false));
+		$BlogPostModel->{$this->pluginModelName}->save($saveData,
+			array('validate' => false, 'callbacks' => false)
+		);
 	}
 
 }
