@@ -120,7 +120,7 @@ class PopularBlogPostViewEventListener extends BcViewEventListener
 		$this->setUpModel();
 		$data = $this->PopularBlogPostConfigModel->find('first', array(
 			'conditions' => array(
-				'PopularBlogPostConfig.id' => $View->viewVars['blogContent']['BlogContent']['id']
+				'PopularBlogPostConfig.blog_content_id' => $View->viewVars['blogContent']['BlogContent']['id']
 			),
 			'recursive' => -1,
 		));
