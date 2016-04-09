@@ -11,7 +11,7 @@
  * システムナビ
  */
 $config['BcApp.adminNavi.popular_blog_post'] = array(
-		'name'		=> 'ポピュラーブログポスト プラグイン',
+		'name'		=> '人気記事ランキング表示 プラグイン',
 		'contents'	=> array(
 			array('name' => 'アクセス一覧',
 				'url' => array(

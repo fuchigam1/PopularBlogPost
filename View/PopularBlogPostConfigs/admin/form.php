@@ -67,11 +67,11 @@ if (count($blogContentDatas) > 0) {
 	<?php if ($hasAddableBlog): ?>
 	<tr>
 		<th class="col-head">
-			<?php echo $this->BcForm->label('PopularBlogPostConfig.status', 'ポピュラーブログポストの利用') ?>
+			<?php echo $this->BcForm->label('PopularBlogPostConfig.status', '人気記事ランキング表示の利用') ?>
 			<?php echo $this->BcBaser->img('admin/icn_help.png', array('id' => 'helpPopularBlogPostConfigStatus', 'class' => 'btn help', 'alt' => 'ヘルプ')) ?>
 			<div id="helptextPopularBlogPostConfigStatus" class="helptext">
 				<ul>
-					<li>ブログ記事でのポピュラーブログポストの利用の有無を指定します。</li>
+					<li>ブログ記事での人気記事ランキング表示の利用の有無を指定します。</li>
 				</ul>
 			</div>
 		</th>

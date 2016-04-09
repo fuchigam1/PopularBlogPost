@@ -31,7 +31,7 @@ class PopularBlogPostsController extends PopularBlogPostAppController
 	 */
 	public $crumbs = array(
 		array('name' => 'プラグイン管理', 'url' => array('plugin' => '', 'controller' => 'plugins', 'action' => 'index')),
-		array('name' => 'ポピュラーブログポスト管理', 'url' => array('plugin' => 'popular_blog_post', 'controller' => 'popular_blog_posts', 'action' => 'index'))
+		array('name' => '人気記事ランキング表示管理', 'url' => array('plugin' => 'popular_blog_post', 'controller' => 'popular_blog_posts', 'action' => 'index'))
 	);
 
 	/**
@@ -39,7 +39,7 @@ class PopularBlogPostsController extends PopularBlogPostAppController
 	 *
 	 * @var string
 	 */
-	public $adminTitle = 'ポピュラーブログポスト';
+	public $adminTitle = '人気記事ランキング表示';
 
 	/**
 	 * beforeFilter

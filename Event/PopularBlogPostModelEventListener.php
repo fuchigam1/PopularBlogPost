@@ -36,7 +36,7 @@ class PopularBlogPostModelEventListener extends BcModelEventListener
 	public function blogBlogPostBeforeFind(CakeEvent $event)
 	{
 		$Model = $event->subject();
-		// ブログ記事取得の際にポピュラーブログポスト情報も併せて取得する
+		// ブログ記事取得の際に人気記事ランキング表示情報も併せて取得する
 		$association = array(
 			$this->pluginModelName => array(
 				'className' => $this->plugin .'.'. $this->pluginModelName,
@@ -75,7 +75,7 @@ class PopularBlogPostModelEventListener extends BcModelEventListener
 	public function blogBlogContentBeforeFind(CakeEvent $event)
 	{
 		$Model = $event->subject();
-		// ブログ設定取得の際にポピュラーブログポスト設定情報も併せて取得する
+		// ブログ設定取得の際に人気記事ランキング表示設定情報も併せて取得する
 		$association = array(
 			'PopularBlogPostConfig' => array(
 				'className' => $this->plugin .'.PopularBlogPostConfig',

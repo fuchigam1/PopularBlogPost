@@ -7,7 +7,7 @@
  * @package			PopularBlogPost
  * @license			MIT
  */
-$title = 'ポピュラーブログポスト';
+$title = '人気記事ランキング表示';
 $description = 'ブログ記事のアクセスランキングを表示できます。';
 $author = 'arata';
 $url = 'http://www.materializing.net/';

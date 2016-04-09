@@ -31,7 +31,7 @@ class PopularBlogPostConfigsController extends PopularBlogPostAppController
 	 */
 	public $crumbs = array(
 		array('name' => 'プラグイン管理', 'url' => array('plugin' => '', 'controller' => 'plugins', 'action' => 'index')),
-		array('name' => 'ポピュラーブログポスト設定管理', 'url' => array('plugin' => 'popular_blog_post', 'controller' => 'popular_blog_post_configs', 'action' => 'index'))
+		array('name' => '人気記事ランキング表示設定管理', 'url' => array('plugin' => 'popular_blog_post', 'controller' => 'popular_blog_post_configs', 'action' => 'index'))
 	);
 
 	/**
@@ -39,7 +39,7 @@ class PopularBlogPostConfigsController extends PopularBlogPostAppController
 	 *
 	 * @var string
 	 */
-	public $adminTitle = 'ポピュラーブログポスト設定';
+	public $adminTitle = '人気記事ランキング表示設定';
 
 	/**
 	 * beforeFilter
@@ -117,8 +117,8 @@ class PopularBlogPostConfigsController extends PopularBlogPostAppController
 	}
 
 	/**
-	 * [ADMIN] 各ブログ別のポピュラーブログポスト設定データを作成する
-	 *   ・ポピュラーブログポスト設定データがないブログ用のデータのみ作成する
+	 * [ADMIN] 各ブログ別の人気記事ランキング表示設定データを作成する
+	 *   ・人気記事ランキング表示設定データがないブログ用のデータのみ作成する
 	 * 
 	 */
 	public function admin_first()
@@ -140,7 +140,7 @@ class PopularBlogPostConfigsController extends PopularBlogPostAppController
 					}
 				}
 			}
-			$message = sprintf('%s 件のポピュラーブログポスト設定を登録しました。', $count);
+			$message = sprintf('%s 件の人気記事ランキング表示設定を登録しました。', $count);
 			$this->setMessage($message);
 			$this->redirect(array('controller' => 'popular_blog_post_configs', 'action' => 'index'));
 		}
