@@ -33,12 +33,20 @@
 		<?php echo $data['PopularBlogPost']['id'] ?>
 	</td>
 	<td>
+	<?php if (Hash::get($data, 'BlogPost.blog_content_id')): ?>
 		<?php echo $blogContentDatas[$data['PopularBlogPost']['blog_content_id']] ?>
+	<?php else: ?>
+		<p class="annotation-text"><small>記事削除済</small></p>
+	<?php endif ?>
 	</td>
 	<td>
+	<?php if (Hash::get($data, 'BlogPost.name')): ?>
 		<?php $this->BcBaser->link($data['BlogPost']['name'],
 			array('admin' => true, 'plugin' => 'blog', 'controller' => 'blog_posts', 'action' => 'edit', $data['BlogPost']['blog_content_id'], $data['BlogPost']['id']),
 			array('title' => 'ブログ記事編集'), 'ブログ記事編集画面へ移動します。よろしいですか？', false); ?>
+	<?php else: ?>
+		<p class="annotation-text"><small>記事削除済</small></p>
+	<?php endif ?>
 	</td>
 	<td>
 		<?php echo $data['PopularBlogPost']['view_count'] ?>
