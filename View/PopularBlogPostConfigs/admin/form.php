@@ -20,21 +20,8 @@ if (count($blogContentDatas) > 0) {
 	<?php echo $this->BcForm->create('PopularBlogPostConfig', array('url' => array('action' => 'add'))) ?>
 <?php endif ?>
 
-<?php if($this->request->params['action'] != 'admin_add'): ?>
-<h2>
-<?php $this->BcBaser->link($blogContentDatas[$this->request->data['PopularBlogPostConfig']['blog_content_id']] .' ブログ設定編集はこちら', array(
-	'admin' => true, 'plugin' => 'blog', 'controller' => 'blog_contents',
-	'action' => 'edit', $this->request->data['PopularBlogPostConfig']['blog_content_id']
-)) ?>
-&nbsp;&nbsp;&nbsp;&nbsp;
-<?php $this->BcBaser->link('≫記事一覧こちら', array(
-	'admin' => true, 'plugin' => 'blog', 'controller' => 'blog_posts',
-	'action' => 'index', $this->request->data['PopularBlogPostConfig']['blog_content_id']
-)) ?>
-</h2>
-<?php endif ?>
-
 <div id="PopularBlogPostConfigConfigTable">
+<h2>設定項目</h2>
 <table cellpadding="0" cellspacing="0" class="form-table section">
 	<?php if($this->request->params['action'] != 'admin_add'): ?>
 	<tr>

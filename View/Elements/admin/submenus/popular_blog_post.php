@@ -30,6 +30,17 @@ $menuList = Configure::read('BcApp.adminNavi.'. Inflector::underscore($this->plu
 		</ul>
 	</td>
 </tr>
+<?php if ($this->request->params['controller'] == 'popular_blog_post_configs' && $this->request->params['action'] == 'admin_edit'): ?>
+<tr>
+	<th>ブログコンテンツ管理メニュー</th>
+	<td>
+		<ul>
+			<li><?php $this->BcBaser->link($blogContentDatas[$this->request->data['PopularBlogPostConfig']['blog_content_id']] . ' ブログ設定編集', array('admin' => true, 'plugin' => 'blog', 'controller' => 'blog_contents', 'action' => 'edit', $this->request->data['PopularBlogPostConfig']['blog_content_id'])) ?></li>
+			<li><?php $this->BcBaser->link('記事一覧', array('admin' => true, 'plugin' => 'blog', 'controller' => 'blog_posts', 'action' => 'index', $this->request->data['PopularBlogPostConfig']['blog_content_id'])) ?></li>
+		</ul>
+	</td>
+</tr>
+<?php endif; ?>
 <?php if ($this->request->params['controller'] == 'popular_blog_posts' && $this->request->params['action'] == 'admin_index'): ?>
 <tr>
 	<th>データメンテナンス</th>
