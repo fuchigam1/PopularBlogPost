@@ -51,8 +51,9 @@ class PopularBlogPostHelper extends AppHelper
 		}
 
 		$_options	 = array(
-			'limit'	 => 5,
-			'order'	 => 'DESC',
+			'limit'				 => 5,
+			'order'				 => 'DESC',
+			'blog_category_id'	 => '',
 		);
 		$options	 = Hash::merge($_options, $options);
 
@@ -65,6 +66,14 @@ class PopularBlogPostHelper extends AppHelper
 			$conditions = Hash::merge($conditions, array(
 						'conditions' => array(
 							'PopularBlogPost.blog_content_id' => $blogContentId,
+						),
+			));
+		}
+
+		if ($options['blog_category_id']) {
+			$conditions = Hash::merge($conditions, array(
+						'conditions' => array(
+							'BlogPost.blog_category_id' => $options['blog_category_id'],
 						),
 			));
 		}
