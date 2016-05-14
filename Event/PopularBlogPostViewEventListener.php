@@ -183,13 +183,12 @@ class PopularBlogPostViewEventListener extends BcViewEventListener
 		);
 		$saveData	 = Hash::merge($blogAccess, $saveData);
 
-		if (ClassRegistry::isKeySet('BlogPost')) {
-			$BlogPostModel = ClassRegistry::getObject('BlogPost');
+		if (ClassRegistry::isKeySet('Blog.BlogPost')) {
+			$BlogPostModel = ClassRegistry::getObject('Blog.BlogPost');
 		} else {
-			$BlogPostModel = ClassRegistry::init('BlogPost');
+			$BlogPostModel = ClassRegistry::init('Blog.BlogPost');
 		}
-		$BlogPostModel->{$this->pluginModelName}->save($saveData, array('validate' => false, 'callbacks' => false)
-		);
+		$BlogPostModel->{$this->pluginModelName}->save($saveData, array('validate' => false));
 	}
 
 }
