@@ -70,6 +70,16 @@ class PopularBlogPostHelper extends AppHelper
 		}
 
 		$datas = $PopularBlogPost->find('all', $conditions);
+		if ($datas) {
+			$dataList = array();
+			foreach ($datas as $data) {
+				if (Hash::get($data, 'BlogPost.id')) {
+					$dataList[] = $data;
+				}
+			}
+			return $dataList;
+		}
+
 		return $datas;
 	}
 
