@@ -1,4 +1,5 @@
 <?php
+
 /**
  * [Model] PopularBlogPost
  *
@@ -9,6 +10,7 @@
  */
 class PopularBlogPost extends BcPluginAppModel
 {
+
 	/**
 	 * ModelName
 	 * 
@@ -30,7 +32,7 @@ class PopularBlogPost extends BcPluginAppModel
 	 */
 	public $belongsTo = array(
 		'BlogPost' => array(
-			'className'	=> 'Blog.BlogPost',
+			'className'	 => 'Blog.BlogPost',
 			'foreignKey' => 'blog_post_id'
 		)
 	);
@@ -43,8 +45,8 @@ class PopularBlogPost extends BcPluginAppModel
 	public $validate = array(
 		'blog_post_id' => array(
 			'notEmpty' => array(
-				'rule'		=> array('notEmpty'),
-				'message'	=> '必須入力です。'
+				'rule'		 => array('notEmpty'),
+				'message'	 => '必須入力です。'
 			)
 		)
 	);
@@ -78,7 +80,7 @@ class PopularBlogPost extends BcPluginAppModel
 			$data = $this->data;
 		}
 
-		$data['update_date'] = date('Y-m-d H:i:s');
+		$data['update_date']	 = date('Y-m-d H:i:s');
 		$this->data[$this->name] = $data;
 		return true;
 	}

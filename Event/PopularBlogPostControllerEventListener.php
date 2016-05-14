@@ -1,4 +1,5 @@
 <?php
+
 /**
  * [ControllerEventListener] PopularBlogPost
  *
@@ -9,6 +10,7 @@
  */
 class PopularBlogPostControllerEventListener extends BcControllerEventListener
 {
+
 	/**
 	 * 登録イベント
 	 *
@@ -25,8 +27,8 @@ class PopularBlogPostControllerEventListener extends BcControllerEventListener
 	 */
 	public function initialize(CakeEvent $event)
 	{
-		$Controller = $event->subject();
-		$Controller->helpers[] = 'PopularBlogPost.PopularBlogPost';
+		$Controller				 = $event->subject();
+		$Controller->helpers[]	 = 'PopularBlogPost.PopularBlogPost';
 	}
 
 }

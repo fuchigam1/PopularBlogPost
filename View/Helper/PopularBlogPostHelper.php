@@ -1,4 +1,5 @@
 <?php
+
 /**
  * [Helper] PopularBlogPost
  *
@@ -9,6 +10,7 @@
  */
 class PopularBlogPostHelper extends AppHelper
 {
+
 	/**
 	 * ヘルパー
 	 *
@@ -24,12 +26,12 @@ class PopularBlogPostHelper extends AppHelper
 	 */
 	public function allowPublish($data)
 	{
-		if (isset($data['PopularBlogPost'])){
+		if (isset($data['PopularBlogPost'])) {
 			$data = $data['PopularBlogPost'];
 		} elseif (isset($data['PopularBlogPostConfig'])) {
 			$data = $data['PopularBlogPostConfig'];
 		}
-		$allowPublish = (int)$data['status'];
+		$allowPublish = (int) $data['status'];
 		return $allowPublish;
 	}
 
@@ -40,29 +42,30 @@ class PopularBlogPostHelper extends AppHelper
 	 * @param array $options
 	 * @return array
 	 */
-	public function getPopularData($blogContentId = '', $options = array()) {
+	public function getPopularData($blogContentId = '', $options = array())
+	{
 		if (ClassRegistry::isKeySet('PopularBlogPost.PopularBlogPost')) {
 			$PopularBlogPost = ClassRegistry::getObject('PopularBlogPost.PopularBlogPost');
 		} else {
 			$PopularBlogPost = ClassRegistry::init('PopularBlogPost.PopularBlogPost');
 		}
 
-		$_options = array(
-			'limit' => 5,
-			'order' => 'DESC',
+		$_options	 = array(
+			'limit'	 => 5,
+			'order'	 => 'DESC',
 		);
-		$options = Hash::merge($_options, $options);
+		$options	 = Hash::merge($_options, $options);
 
 		$conditions = array(
-			'limit' => $options['limit'],
-			'order' => 'PopularBlogPost.view_count '. $options['order'],
+			'limit'	 => $options['limit'],
+			'order'	 => 'PopularBlogPost.view_count ' . $options['order'],
 		);
 
 		if ($blogContentId) {
 			$conditions = Hash::merge($conditions, array(
-				'conditions' => array(
-					'PopularBlogPost.blog_content_id' => $blogContentId,
-				),
+						'conditions' => array(
+							'PopularBlogPost.blog_content_id' => $blogContentId,
+						),
 			));
 		}
 
@@ -76,7 +79,8 @@ class PopularBlogPostHelper extends AppHelper
 	 * @param string $num
 	 * @return int
 	 */
-	public function convertNumeric($num) {
+	public function convertNumeric($num)
+	{
 		$num = mb_convert_kana($num, 'a');
 		if (!is_numeric($num)) {
 			return '';

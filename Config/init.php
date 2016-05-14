@@ -1,4 +1,5 @@
 <?php
+
 /**
  * PopularBlogPost プラグイン用 データベース初期化
  * 

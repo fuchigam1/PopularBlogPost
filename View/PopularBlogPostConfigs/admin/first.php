@@ -25,10 +25,12 @@
 </table>
 
 <div class="submit">
-	<?php echo $this->BcForm->submit('作成する', array(
-		'div' => false,
-		'class' => 'btn-red button',
-		'id' => 'BtnSubmit',
-		'onClick'=>"return confirm('人気記事ランキング表示設定データの作成を行いますが良いですか？')")) ?>
+	<?php
+	echo $this->BcForm->submit('作成する', array(
+		'div'		 => false,
+		'class'		 => 'btn-red button',
+		'id'		 => 'BtnSubmit',
+		'onClick'	 => "return confirm('人気記事ランキング表示設定データの作成を行いますが良いですか？')"))
+	?>
 </div>
 <?php echo $this->BcForm->end() ?>

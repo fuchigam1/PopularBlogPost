@@ -1,4 +1,5 @@
 <?php
+
 /**
  * [Controller] PopularBlogPost 基底コントローラ
  *
@@ -9,6 +10,7 @@
  */
 class PopularBlogPostAppController extends BcPluginAppController
 {
+
 	/**
 	 * ヘルパー
 	 *
@@ -61,8 +63,8 @@ class PopularBlogPostAppController extends BcPluginAppController
 	{
 		parent::beforeFilter();
 		// ブログ情報を取得
-		$BlogContentModel = ClassRegistry::init('Blog.BlogContent');
-		$this->blogContentDatas = $BlogContentModel->find('list', array('recursive' => -1));
+		$BlogContentModel		 = ClassRegistry::init('Blog.BlogContent');
+		$this->blogContentDatas	 = $BlogContentModel->find('list', array('recursive' => -1));
 	}
 
 	/**
@@ -72,17 +74,17 @@ class PopularBlogPostAppController extends BcPluginAppController
 	public function admin_index()
 	{
 		$default = array('named' => array(
-			'num' => $this->siteConfigs['admin_list_num'],
-			'sortmode' => 0)
+				'num'		 => $this->siteConfigs['admin_list_num'],
+				'sortmode'	 => 0)
 		);
 		$this->setViewConditions($this->modelClass, array('default' => $default));
 
-		$conditions = $this->createAdminIndexConditions($this->request->data);
-		$this->paginate = array(
-			'conditions'	=> $conditions,
-			'fields'		=> array(),
+		$conditions		 = $this->createAdminIndexConditions($this->request->data);
+		$this->paginate	 = array(
+			'conditions' => $conditions,
+			'fields'	 => array(),
 			//'order'	=> '{$this->modelClass}.id DESC',
-			'limit'			=> $this->passedArgs['num']
+			'limit'		 => $this->passedArgs['num']
 		);
 		$this->set('datas', $this->paginate($this->modelClass));
 		$this->set('blogContentDatas', array('0' => '指定しない') + $this->blogContentDatas);
@@ -103,11 +105,11 @@ class PopularBlogPostAppController extends BcPluginAppController
 	{
 		if (!$id) {
 			$this->setMessage('無効な処理です。', true);
-			$this->redirect(array('action' => 'index'));			
+			$this->redirect(array('action' => 'index'));
 		}
 		if (empty($this->request->data)) {
-			$this->{$this->modelClass}->id = $id;
-			$this->request->data = $this->{$this->modelClass}->read();
+			$this->{$this->modelClass}->id	 = $id;
+			$this->request->data			 = $this->{$this->modelClass}->read();
 		} else {
 			$this->{$this->modelClass}->set($this->request->data);
 			if ($this->{$this->modelClass}->save($this->request->data)) {
@@ -116,7 +118,7 @@ class PopularBlogPostAppController extends BcPluginAppController
 			} else {
 				$this->setMessage('入力エラーです。内容を修正して下さい。', true);
 			}
-		}		
+		}
 		$this->set('blogContentDatas', array('0' => '指定しない') + $this->blogContentDatas);
 		$this->render('form');
 	}
@@ -194,7 +196,7 @@ class PopularBlogPostAppController extends BcPluginAppController
 		$data = $this->{$this->modelClass}->read(null, $id);
 		// 削除実行
 		if ($this->{$this->modelClass}->delete($id)) {
-			$this->{$this->modelClass}->saveDbLog($this->adminTitle .' ID: '. $data[$this->modelClass]['id'] .' を削除しました。');
+			$this->{$this->modelClass}->saveDbLog($this->adminTitle . ' ID: ' . $data[$this->modelClass]['id'] . ' を削除しました。');
 			return true;
 		} else {
 			return false;
@@ -302,11 +304,11 @@ class PopularBlogPostAppController extends BcPluginAppController
 	 */
 	protected function _changeStatus($id, $status)
 	{
-		$data = $this->{$this->modelClass}->find('first', array(
+		$data								 = $this->{$this->modelClass}->find('first', array(
 			'conditions' => array('id' => $id),
-			'recursive' => -1
+			'recursive'	 => -1
 		));
-		$data[$this->modelClass]['status'] = $status;
+		$data[$this->modelClass]['status']	 = $status;
 		if ($status) {
 			$data[$this->modelClass]['status'] = true;
 		} else {

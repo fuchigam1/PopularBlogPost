@@ -1,4 +1,5 @@
 <?php
+
 /**
  * [Controller] PopularBlogPosts
  *
@@ -8,8 +9,10 @@
  * @license			MIT
  */
 App::uses('PopularBlogPostApp', 'PopularBlogPost.Controller');
+
 class PopularBlogPostConfigsController extends PopularBlogPostAppController
 {
+
 	/**
 	 * ControllerName
 	 * 
@@ -57,8 +60,8 @@ class PopularBlogPostConfigsController extends PopularBlogPostAppController
 	public function admin_index()
 	{
 		$this->pageTitle = $this->adminTitle . '一覧';
-		$this->search = 'popular_blog_post_configs_index';
-		$this->help = 'popular_blog_post_configs_index';
+		$this->search	 = 'popular_blog_post_configs_index';
+		$this->help		 = 'popular_blog_post_configs_index';
 		parent::admin_index();
 	}
 
@@ -70,7 +73,7 @@ class PopularBlogPostConfigsController extends PopularBlogPostAppController
 	public function admin_edit($id = null)
 	{
 		$this->pageTitle = $this->adminTitle . '編集';
-		$this->help = 'popular_blog_post_configs_index';
+		$this->help		 = 'popular_blog_post_configs_index';
 		parent::admin_edit($id);
 	}
 
@@ -126,11 +129,11 @@ class PopularBlogPostConfigsController extends PopularBlogPostAppController
 		if ($this->request->data) {
 			$count = 0;
 			if ($this->blogContentDatas) {
-				foreach ($this->blogContentDatas as $key => $blog) {	
+				foreach ($this->blogContentDatas as $key => $blog) {
 					$configData = $this->PopularBlogPostConfig->findByBlogContentId($key);
 					if (!$configData) {
 						$this->request->data['PopularBlogPostConfig']['blog_content_id'] = $key;
-						$this->request->data['PopularBlogPostConfig']['status'] = true;
+						$this->request->data['PopularBlogPostConfig']['status']			 = true;
 						$this->PopularBlogPostConfig->create($this->request->data);
 						if (!$this->PopularBlogPostConfig->save($this->request->data, false)) {
 							$this->log(sprintf('ブログID：%s の登録に失敗しました。', $key));
@@ -156,8 +159,8 @@ class PopularBlogPostConfigsController extends PopularBlogPostAppController
 	 */
 	protected function createAdminIndexConditions($data)
 	{
-		$conditions = array();
-		$blogContentId = '';
+		$conditions		 = array();
+		$blogContentId	 = '';
 
 		if (isset($data[$this->modelClass]['blog_content_id'])) {
 			$blogContentId = $data[$this->modelClass]['blog_content_id'];
@@ -170,7 +173,7 @@ class PopularBlogPostConfigsController extends PopularBlogPostAppController
 		unset($data[$this->modelClass]['blog_content_id']);
 
 		// 条件指定のないフィールドを解除
-		foreach($data[$this->modelClass] as $key => $value) {
+		foreach ($data[$this->modelClass] as $key => $value) {
 			if ($value === '') {
 				unset($data[$this->modelClass][$key]);
 			}
@@ -182,11 +185,11 @@ class PopularBlogPostConfigsController extends PopularBlogPostAppController
 
 		if ($blogContentId) {
 			$conditions = array(
-				$this->modelClass .'.blog_content_id' => $blogContentId
+				$this->modelClass . '.blog_content_id' => $blogContentId
 			);
 		}
 
-		if($conditions) {
+		if ($conditions) {
 			return $conditions;
 		} else {
 			return array();

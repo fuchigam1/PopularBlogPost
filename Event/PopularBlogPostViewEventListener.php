@@ -1,4 +1,5 @@
 <?php
+
 /**
  * [ViewEventListener] PopularBlogPost
  *
@@ -9,6 +10,7 @@
  */
 class PopularBlogPostViewEventListener extends BcViewEventListener
 {
+
 	/**
 	 * 登録イベント
 	 *
@@ -45,10 +47,10 @@ class PopularBlogPostViewEventListener extends BcViewEventListener
 	 */
 	private function setUpModel()
 	{
-		if (ClassRegistry::isKeySet($this->plugin .'.PopularBlogPostConfig')) {
-			$this->PopularBlogPostConfigModel = ClassRegistry::getObject($this->plugin .'.PopularBlogPostConfig');
+		if (ClassRegistry::isKeySet($this->plugin . '.PopularBlogPostConfig')) {
+			$this->PopularBlogPostConfigModel = ClassRegistry::getObject($this->plugin . '.PopularBlogPostConfig');
 		} else {
-			$this->PopularBlogPostConfigModel = ClassRegistry::init($this->plugin .'.PopularBlogPostConfig');
+			$this->PopularBlogPostConfigModel = ClassRegistry::init($this->plugin . '.PopularBlogPostConfig');
 		}
 	}
 
@@ -122,7 +124,7 @@ class PopularBlogPostViewEventListener extends BcViewEventListener
 			'conditions' => array(
 				'PopularBlogPostConfig.blog_content_id' => $View->viewVars['blogContent']['BlogContent']['id']
 			),
-			'recursive' => -1,
+			'recursive'	 => -1,
 		));
 		if ($data) {
 			$this->popularBlogPostConfig = $data['PopularBlogPostConfig'];
@@ -147,7 +149,7 @@ class PopularBlogPostViewEventListener extends BcViewEventListener
 		if (!$this->popularBlogPostConfig['status']) {
 			return false;
 		}
-		
+
 		if (Hash::get($View->viewVars, 'user') && Hash::get($View->viewVars, 'user.id')) {
 			if ($this->popularBlogPostConfig['exclude_admin']) {
 				return false;
@@ -168,26 +170,25 @@ class PopularBlogPostViewEventListener extends BcViewEventListener
 			return;
 		}
 
-		$blogPost = $View->viewVars['post']['BlogPost'];
-		$blogAccess[$this->pluginModelName] = $View->viewVars['post'][$this->pluginModelName];
+		$blogPost							 = $View->viewVars['post']['BlogPost'];
+		$blogAccess[$this->pluginModelName]	 = $View->viewVars['post'][$this->pluginModelName];
 
-		$blogAccess[$this->pluginModelName]['view_count']++;
-		$saveData = array(
+		$blogAccess[$this->pluginModelName]['view_count'] ++;
+		$saveData	 = array(
 			$this->pluginModelName => array(
-				'blog_post_id'		=> $blogPost['id'],
-				'blog_content_id'	=> $blogPost['blog_content_id'],
-				'view_count' => $blogAccess[$this->pluginModelName]['view_count'],
+				'blog_post_id'		 => $blogPost['id'],
+				'blog_content_id'	 => $blogPost['blog_content_id'],
+				'view_count'		 => $blogAccess[$this->pluginModelName]['view_count'],
 			)
 		);
-		$saveData = Hash::merge($blogAccess, $saveData);
+		$saveData	 = Hash::merge($blogAccess, $saveData);
 
 		if (ClassRegistry::isKeySet('BlogPost')) {
 			$BlogPostModel = ClassRegistry::getObject('BlogPost');
 		} else {
 			$BlogPostModel = ClassRegistry::init('BlogPost');
 		}
-		$BlogPostModel->{$this->pluginModelName}->save($saveData,
-			array('validate' => false, 'callbacks' => false)
+		$BlogPostModel->{$this->pluginModelName}->save($saveData, array('validate' => false, 'callbacks' => false)
 		);
 	}
 

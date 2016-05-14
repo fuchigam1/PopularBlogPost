@@ -1,4 +1,5 @@
 <?php
+
 /**
  * [Model] PopularBlogPostConfig
  *
@@ -9,6 +10,7 @@
  */
 class PopularBlogPostConfig extends BcPluginAppModel
 {
+
 	/**
 	 * ModelName
 	 * 
@@ -39,7 +41,7 @@ class PopularBlogPostConfig extends BcPluginAppModel
 	 */
 	public $belongsTo = array(
 		'BlogContent' => array(
-			'className'	=> 'Blog.BlogContent',
+			'className'	 => 'Blog.BlogContent',
 			'foreignKey' => 'blog_content_id'
 		)
 	);
@@ -52,8 +54,8 @@ class PopularBlogPostConfig extends BcPluginAppModel
 	public $validate = array(
 		'blog_content_id' => array(
 			'notEmpty' => array(
-				'rule'		=> array('notEmpty'),
-				'message'	=> '必須入力です。'
+				'rule'		 => array('notEmpty'),
+				'message'	 => '必須入力です。'
 			)
 		)
 	);
@@ -67,8 +69,8 @@ class PopularBlogPostConfig extends BcPluginAppModel
 	{
 		$data = array(
 			$this->name => array(
-				'status' => true,
-				'exclude_admin' => true,
+				'status'		 => true,
+				'exclude_admin'	 => true,
 			)
 		);
 		return $data;
