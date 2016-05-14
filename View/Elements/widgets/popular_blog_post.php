@@ -41,11 +41,7 @@ if (isset($this->Blog)) {
 	<ul>
 		<?php foreach ($datas as $post): ?>
 			<?php $postLink = preg_replace('/^\//', '', $BlogHelper->getPostLinkUrl($post)) ?>
-			<?php if ($this->request->url == $postLink): ?>
-				<?php $class = ' class="current"' ?>
-			<?php else: ?>
-				<?php $class = '' ?>
-			<?php endif ?>
+			<?php $class = ($this->request->url == $postLink) ? ' class="current"' : '' ?>
 			<li<?php echo $class ?>>
 				<?php $BlogHelper->postTitle($post) ?>
 				<?php if ($display_view_count): ?>
