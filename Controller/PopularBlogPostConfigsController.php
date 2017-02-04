@@ -10,8 +10,7 @@
  */
 App::uses('PopularBlogPostApp', 'PopularBlogPost.Controller');
 
-class PopularBlogPostConfigsController extends PopularBlogPostAppController
-{
+class PopularBlogPostConfigsController extends PopularBlogPostAppController {
 
 	/**
 	 * ControllerName
@@ -48,8 +47,7 @@ class PopularBlogPostConfigsController extends PopularBlogPostAppController
 	 * beforeFilter
 	 *
 	 */
-	public function beforeFilter()
-	{
+	public function beforeFilter() {
 		parent::beforeFilter();
 	}
 
@@ -57,8 +55,7 @@ class PopularBlogPostConfigsController extends PopularBlogPostAppController
 	 * [ADMIN] 設定一覧
 	 * 
 	 */
-	public function admin_index()
-	{
+	public function admin_index() {
 		$this->pageTitle = $this->adminTitle . '一覧';
 		$this->search	 = 'popular_blog_post_configs_index';
 		$this->help		 = 'popular_blog_post_configs_index';
@@ -70,8 +67,7 @@ class PopularBlogPostConfigsController extends PopularBlogPostAppController
 	 * 
 	 * @param int $id
 	 */
-	public function admin_edit($id = null)
-	{
+	public function admin_edit($id = null) {
 		$this->pageTitle = $this->adminTitle . '編集';
 		$this->help		 = 'popular_blog_post_configs_index';
 		parent::admin_edit($id);
@@ -81,8 +77,7 @@ class PopularBlogPostConfigsController extends PopularBlogPostAppController
 	 * [ADMIN] 追加
 	 * 
 	 */
-	public function admin_add()
-	{
+	public function admin_add() {
 		$this->pageTitle = $this->adminTitle . '追加';
 
 		if ($this->request->is('post')) {
@@ -114,8 +109,7 @@ class PopularBlogPostConfigsController extends PopularBlogPostAppController
 	 *
 	 * @param int $id
 	 */
-	public function admin_delete($id = null)
-	{
+	public function admin_delete($id = null) {
 		parent::admin_delete($id);
 	}
 
@@ -124,8 +118,7 @@ class PopularBlogPostConfigsController extends PopularBlogPostAppController
 	 *   ・人気記事ランキング表示設定データがないブログ用のデータのみ作成する
 	 * 
 	 */
-	public function admin_first()
-	{
+	public function admin_first() {
 		if ($this->request->data) {
 			$count = 0;
 			if ($this->blogContentDatas) {
@@ -157,8 +150,7 @@ class PopularBlogPostConfigsController extends PopularBlogPostAppController
 	 * @param array $data
 	 * @return array $conditions
 	 */
-	protected function createAdminIndexConditions($data)
-	{
+	protected function createAdminIndexConditions($data) {
 		$conditions		 = array();
 		$blogContentId	 = '';
 

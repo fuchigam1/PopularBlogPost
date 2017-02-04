@@ -8,8 +8,7 @@
  * @package			PopularBlogPost
  * @license			MIT
  */
-class PopularBlogPostAppController extends BcPluginAppController
-{
+class PopularBlogPostAppController extends BcPluginAppController {
 
 	/**
 	 * ヘルパー
@@ -59,8 +58,7 @@ class PopularBlogPostAppController extends BcPluginAppController
 	 * beforeFilter
 	 *
 	 */
-	public function beforeFilter()
-	{
+	public function beforeFilter() {
 		parent::beforeFilter();
 		// ブログ情報を取得
 		$BlogContentModel		 = ClassRegistry::init('Blog.BlogContent');
@@ -71,8 +69,7 @@ class PopularBlogPostAppController extends BcPluginAppController
 	 * [ADMIN] 一覧表示
 	 * 
 	 */
-	public function admin_index()
-	{
+	public function admin_index() {
 		$default = array('named' => array(
 				'num'		 => $this->siteConfigs['admin_list_num'],
 				'sortmode'	 => 0)
@@ -101,8 +98,7 @@ class PopularBlogPostAppController extends BcPluginAppController
 	 * 
 	 * @param int $id
 	 */
-	public function admin_edit($id = null)
-	{
+	public function admin_edit($id = null) {
 		if (!$id) {
 			$this->setMessage('無効な処理です。', true);
 			$this->redirect(array('action' => 'index'));
@@ -127,8 +123,7 @@ class PopularBlogPostAppController extends BcPluginAppController
 	 * [ADMIN] 追加
 	 * 
 	 */
-	public function admin_add()
-	{
+	public function admin_add() {
 		$this->pageTitle = $this->adminTitle . '追加';
 
 		if ($this->request->is('post')) {
@@ -150,8 +145,7 @@ class PopularBlogPostAppController extends BcPluginAppController
 	 *
 	 * @param int $id
 	 */
-	public function admin_delete($id = null)
-	{
+	public function admin_delete($id = null) {
 		if (!$id) {
 			$this->setMessage('無効な処理です。', true);
 			$this->redirect(array('action' => 'index'));
@@ -171,8 +165,7 @@ class PopularBlogPostAppController extends BcPluginAppController
 	 *
 	 * @param int $id
 	 */
-	public function admin_ajax_delete($id = null)
-	{
+	public function admin_ajax_delete($id = null) {
 		if (!$id) {
 			$this->ajaxError(500, '無効な処理です。');
 		}
@@ -190,8 +183,7 @@ class PopularBlogPostAppController extends BcPluginAppController
 	 * @param int $id
 	 * @return boolean 
 	 */
-	protected function _delete($id)
-	{
+	protected function _delete($id) {
 		// メッセージ用にデータを取得
 		$data = $this->{$this->modelClass}->read(null, $id);
 		// 削除実行
@@ -209,8 +201,7 @@ class PopularBlogPostAppController extends BcPluginAppController
 	 * @param array $ids
 	 * @return boolean
 	 */
-	protected function _batch_del($ids)
-	{
+	protected function _batch_del($ids) {
 		if ($ids) {
 			foreach ($ids as $id) {
 				$this->_delete($id);
@@ -224,8 +215,7 @@ class PopularBlogPostAppController extends BcPluginAppController
 	 * 
 	 * @param int $id
 	 */
-	public function admin_unpublish($id)
-	{
+	public function admin_unpublish($id) {
 		if (!$id) {
 			$this->setMessage('この処理は無効です。', true);
 			$this->redirect(array('action' => 'index'));
@@ -243,8 +233,7 @@ class PopularBlogPostAppController extends BcPluginAppController
 	 * 
 	 * @param int $id
 	 */
-	public function admin_publish($id)
-	{
+	public function admin_publish($id) {
 		if (!$id) {
 			$this->setMessage('この処理は無効です。', true);
 			$this->redirect(array('action' => 'index'));
@@ -262,8 +251,7 @@ class PopularBlogPostAppController extends BcPluginAppController
 	 * 
 	 * @param int $id
 	 */
-	public function admin_ajax_unpublish($id)
-	{
+	public function admin_ajax_unpublish($id) {
 		if (!$id) {
 			$this->ajaxError(500, '無効な処理です。');
 		}
@@ -281,8 +269,7 @@ class PopularBlogPostAppController extends BcPluginAppController
 	 * 
 	 * @param int $id
 	 */
-	public function admin_ajax_publish($id)
-	{
+	public function admin_ajax_publish($id) {
 		if (!$id) {
 			$this->ajaxError(500, '無効な処理です。');
 		}
@@ -302,8 +289,7 @@ class PopularBlogPostAppController extends BcPluginAppController
 	 * @param boolean $status
 	 * @return boolean 
 	 */
-	protected function _changeStatus($id, $status)
-	{
+	protected function _changeStatus($id, $status) {
 		$data								 = $this->{$this->modelClass}->find('first', array(
 			'conditions' => array('id' => $id),
 			'recursive'	 => -1

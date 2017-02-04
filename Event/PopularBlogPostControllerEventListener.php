@@ -8,8 +8,7 @@
  * @package			PopularBlogPost
  * @license			MIT
  */
-class PopularBlogPostControllerEventListener extends BcControllerEventListener
-{
+class PopularBlogPostControllerEventListener extends BcControllerEventListener {
 
 	/**
 	 * 登録イベント
@@ -25,8 +24,7 @@ class PopularBlogPostControllerEventListener extends BcControllerEventListener
 	 * 
 	 * @param CakeEvent $event
 	 */
-	public function initialize(CakeEvent $event)
-	{
+	public function initialize(CakeEvent $event) {
 		$Controller				 = $event->subject();
 		$Controller->helpers[]	 = 'PopularBlogPost.PopularBlogPost';
 	}

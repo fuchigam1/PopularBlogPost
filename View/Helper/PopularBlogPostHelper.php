@@ -8,8 +8,7 @@
  * @package			PopularBlogPost
  * @license			MIT
  */
-class PopularBlogPostHelper extends AppHelper
-{
+class PopularBlogPostHelper extends AppHelper {
 
 	/**
 	 * ヘルパー
@@ -24,8 +23,7 @@ class PopularBlogPostHelper extends AppHelper
 	 * @param array $data
 	 * @return boolean 公開状態
 	 */
-	public function allowPublish($data)
-	{
+	public function allowPublish($data) {
 		if (isset($data['PopularBlogPost'])) {
 			$data = $data['PopularBlogPost'];
 		} elseif (isset($data['PopularBlogPostConfig'])) {
@@ -42,8 +40,7 @@ class PopularBlogPostHelper extends AppHelper
 	 * @param array $options
 	 * @return array
 	 */
-	public function getPopularData($blogContentId = '', $options = array())
-	{
+	public function getPopularData($blogContentId = '', $options = array()) {
 		if (ClassRegistry::isKeySet('PopularBlogPost.PopularBlogPost')) {
 			$PopularBlogPost = ClassRegistry::getObject('PopularBlogPost.PopularBlogPost');
 		} else {
@@ -98,8 +95,7 @@ class PopularBlogPostHelper extends AppHelper
 	 * @param string $num
 	 * @return int
 	 */
-	public function convertNumeric($num)
-	{
+	public function convertNumeric($num) {
 		$num = mb_convert_kana($num, 'a');
 		if (!is_numeric($num)) {
 			return '';

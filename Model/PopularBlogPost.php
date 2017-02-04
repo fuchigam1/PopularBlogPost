@@ -8,8 +8,7 @@
  * @package			PopularBlogPost
  * @license			MIT
  */
-class PopularBlogPost extends BcPluginAppModel
-{
+class PopularBlogPost extends BcPluginAppModel {
 
 	/**
 	 * ModelName
@@ -56,8 +55,7 @@ class PopularBlogPost extends BcPluginAppModel
 	 *
 	 * @return array
 	 */
-	public function getDefaultValue()
-	{
+	public function getDefaultValue() {
 		$data = array(
 			$this->name => array(
 				'view_count' => 0,
@@ -72,8 +70,7 @@ class PopularBlogPost extends BcPluginAppModel
 	 * @param array $options
 	 * @return boolean
 	 */
-	public function beforeSave($options = array())
-	{
+	public function beforeSave($options = array()) {
 		if (isset($this->data[$this->name])) {
 			$data = $this->data[$this->name];
 		} else {

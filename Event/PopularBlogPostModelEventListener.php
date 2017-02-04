@@ -8,8 +8,7 @@
  * @package			PopularBlogPost
  * @license			MIT
  */
-class PopularBlogPostModelEventListener extends BcModelEventListener
-{
+class PopularBlogPostModelEventListener extends BcModelEventListener {
 
 	/**
 	 * 登録イベント
@@ -35,8 +34,7 @@ class PopularBlogPostModelEventListener extends BcModelEventListener
 	 * 
 	 * @param CakeEvent $event
 	 */
-	public function blogBlogPostBeforeFind(CakeEvent $event)
-	{
+	public function blogBlogPostBeforeFind(CakeEvent $event) {
 		$Model		 = $event->subject();
 		// ブログ記事取得の際に人気記事ランキング表示情報も併せて取得する
 		$association = array(
@@ -53,8 +51,7 @@ class PopularBlogPostModelEventListener extends BcModelEventListener
 	 * 
 	 * @param CakeEvent $event
 	 */
-	public function blogBlogPostAfterDelete(CakeEvent $event)
-	{
+	public function blogBlogPostAfterDelete(CakeEvent $event) {
 		$Model	 = $event->subject();
 		// ブログ記事削除時、そのブログ記事が持つPopularBlogPostを削除する
 		$data	 = $Model->{$this->pluginModelName}->find('first', array(
@@ -74,8 +71,7 @@ class PopularBlogPostModelEventListener extends BcModelEventListener
 	 * @param CakeEvent $event
 	 * @return array
 	 */
-	public function blogBlogContentBeforeFind(CakeEvent $event)
-	{
+	public function blogBlogContentBeforeFind(CakeEvent $event) {
 		$Model		 = $event->subject();
 		// ブログ設定取得の際に人気記事ランキング表示設定情報も併せて取得する
 		$association = array(
@@ -92,8 +88,7 @@ class PopularBlogPostModelEventListener extends BcModelEventListener
 	 * 
 	 * @param CakeEvent $event
 	 */
-	public function blogBlogContentAfterDelete(CakeEvent $event)
-	{
+	public function blogBlogContentAfterDelete(CakeEvent $event) {
 		$Model	 = $event->subject();
 		// ブログ削除時、そのブログが持つPopularBlogPost設定を削除する
 		$data	 = $Model->PopularBlogPostConfig->find('first', array(

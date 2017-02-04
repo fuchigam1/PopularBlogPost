@@ -8,8 +8,7 @@
  * @package			PopularBlogPost
  * @license			MIT
  */
-class PopularBlogPostConfig extends BcPluginAppModel
-{
+class PopularBlogPostConfig extends BcPluginAppModel {
 
 	/**
 	 * ModelName
@@ -65,8 +64,7 @@ class PopularBlogPostConfig extends BcPluginAppModel
 	 *
 	 * @return array
 	 */
-	public function getDefaultValue()
-	{
+	public function getDefaultValue() {
 		$data = array(
 			$this->name => array(
 				'status'		 => true,

@@ -8,8 +8,7 @@
  * @package			PopularBlogPost
  * @license			MIT
  */
-class PopularBlogPostViewEventListener extends BcViewEventListener
-{
+class PopularBlogPostViewEventListener extends BcViewEventListener {
 
 	/**
 	 * 登録イベント
@@ -45,8 +44,7 @@ class PopularBlogPostViewEventListener extends BcViewEventListener
 	 * PopularBlogPostConfig モデルを準備する
 	 * 
 	 */
-	private function setUpModel()
-	{
+	private function setUpModel() {
 		if (ClassRegistry::isKeySet($this->plugin . '.PopularBlogPostConfig')) {
 			$this->PopularBlogPostConfigModel = ClassRegistry::getObject($this->plugin . '.PopularBlogPostConfig');
 		} else {
@@ -59,8 +57,7 @@ class PopularBlogPostViewEventListener extends BcViewEventListener
 	 * 
 	 * @param CakeEvent $event
 	 */
-	public function blogBlogAfterRender(CakeEvent $event)
-	{
+	public function blogBlogAfterRender(CakeEvent $event) {
 		if (BcUtil::isAdminSystem()) {
 			return;
 		}
@@ -87,8 +84,7 @@ class PopularBlogPostViewEventListener extends BcViewEventListener
 	 * @param Opject $View
 	 * @return boolean
 	 */
-	private function isSingleAccess($View)
-	{
+	private function isSingleAccess($View) {
 		if (Hash::get($View->viewVars, 'preview')) {
 			return false;
 		}
@@ -113,8 +109,7 @@ class PopularBlogPostViewEventListener extends BcViewEventListener
 	 * @param Opject $View
 	 * @return boolean
 	 */
-	private function hasPopularBlogPostConfig($View)
-	{
+	private function hasPopularBlogPostConfig($View) {
 		if (!Hash::get($View->viewVars, 'blogContent')) {
 			return false;
 		}
@@ -140,8 +135,7 @@ class PopularBlogPostViewEventListener extends BcViewEventListener
 	 * @param Opject $View
 	 * @return boolean
 	 */
-	private function isEnabledRecordSingleAccess($View)
-	{
+	private function isEnabledRecordSingleAccess($View) {
 		if (!$this->popularBlogPostConfig) {
 			return false;
 		}
@@ -164,8 +158,7 @@ class PopularBlogPostViewEventListener extends BcViewEventListener
 	 * 
 	 * @param Object $View
 	 */
-	private function saveCountBlogAccess($View)
-	{
+	private function saveCountBlogAccess($View) {
 		if (!isset($View->viewVars['post'][$this->pluginModelName])) {
 			return;
 		}

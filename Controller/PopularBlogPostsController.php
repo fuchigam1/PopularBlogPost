@@ -10,8 +10,7 @@
  */
 App::uses('PopularBlogPostApp', 'PopularBlogPost.Controller');
 
-class PopularBlogPostsController extends PopularBlogPostAppController
-{
+class PopularBlogPostsController extends PopularBlogPostAppController {
 
 	/**
 	 * ControllerName
@@ -48,8 +47,7 @@ class PopularBlogPostsController extends PopularBlogPostAppController
 	 * beforeFilter
 	 *
 	 */
-	public function beforeFilter()
-	{
+	public function beforeFilter() {
 		parent::beforeFilter();
 	}
 
@@ -57,8 +55,7 @@ class PopularBlogPostsController extends PopularBlogPostAppController
 	 * [ADMIN] 一覧
 	 * 
 	 */
-	public function admin_index()
-	{
+	public function admin_index() {
 		$this->pageTitle = $this->adminTitle . '一覧';
 		$this->search	 = 'popular_blog_posts_index';
 		$this->help		 = 'popular_blog_posts_index';
@@ -91,8 +88,7 @@ class PopularBlogPostsController extends PopularBlogPostAppController
 	 * 
 	 * @param int $id
 	 */
-	public function admin_edit($id = null)
-	{
+	public function admin_edit($id = null) {
 		$this->pageTitle = $this->adminTitle . '編集';
 		$this->help		 = 'popular_blog_posts_index';
 		parent::admin_edit($id);
@@ -103,8 +99,7 @@ class PopularBlogPostsController extends PopularBlogPostAppController
 	 *
 	 * @param int $id
 	 */
-	public function admin_delete($id = null)
-	{
+	public function admin_delete($id = null) {
 		parent::admin_delete($id);
 	}
 
@@ -112,8 +107,7 @@ class PopularBlogPostsController extends PopularBlogPostAppController
 	 * [ADMIN] 全てのアクセスデータの削除
 	 * 
 	 */
-	public function admin_delete_all()
-	{
+	public function admin_delete_all() {
 		$hasDeleteError	 = array();
 		$datas			 = $this->{$this->modelClass}->find('all', array('recursive' => -1));
 		if ($datas) {
@@ -147,8 +141,7 @@ class PopularBlogPostsController extends PopularBlogPostAppController
 	 * @param array $data
 	 * @return array $conditions
 	 */
-	protected function createAdminIndexConditions($data)
-	{
+	protected function createAdminIndexConditions($data) {
 		$conditions		 = array();
 		$blogContentId	 = '';
 		$beginDateTime	 = '';
