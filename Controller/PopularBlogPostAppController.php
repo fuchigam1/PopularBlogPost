@@ -178,7 +178,7 @@ class PopularBlogPostAppController extends BcPluginAppController
 		}
 		// 削除実行
 		if ($this->_delete($id)) {
-			clearViewCache();
+			clearAllCache();
 			exit(true);
 		}
 		exit();
@@ -268,7 +268,7 @@ class PopularBlogPostAppController extends BcPluginAppController
 			$this->ajaxError(500, '無効な処理です。');
 		}
 		if ($this->_changeStatus($id, false)) {
-			clearViewCache();
+			clearAllCache();
 			exit(true);
 		} else {
 			$this->ajaxError(500, $this->{$this->modelClass}->validationErrors);
@@ -287,7 +287,7 @@ class PopularBlogPostAppController extends BcPluginAppController
 			$this->ajaxError(500, '無効な処理です。');
 		}
 		if ($this->_changeStatus($id, true)) {
-			clearViewCache();
+			clearAllCache();
 			exit(true);
 		} else {
 			$this->ajaxError(500, $this->{$this->modelClass}->validationErrors);
