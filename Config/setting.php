@@ -30,3 +30,12 @@ $config['BcApp.adminNavi.popular_blog_post'] = array(
 		),
 	)
 );
+/**
+ * 専用ログ
+ */
+define('LOG_POPULAR_BLOG_POST', 'log_popular_blog_post');
+CakeLog::config('log_popular_blog_post', array(
+	'engine' => 'FileLog',
+	'types'	 => array('log_popular_blog_post'),
+	'file'	 => 'log_popular_blog_post',
+));
