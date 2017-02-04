@@ -170,25 +170,30 @@ class PopularBlogPostViewEventListener extends BcViewEventListener
 			return;
 		}
 
-		$blogPost							 = $View->viewVars['post']['BlogPost'];
-		$blogAccess[$this->pluginModelName]	 = $View->viewVars['post'][$this->pluginModelName];
+		$blogPost				 = $View->viewVars['post']['BlogPost'];
+		$PopularBlogPostModel	 = ClassRegistry::init($this->pluginModelName);
+		$PopularBlogPostModel->begin();
 
-		$blogAccess[$this->pluginModelName]['view_count'] ++;
-		$saveData	 = array(
-			$this->pluginModelName => array(
-				'blog_post_id'		 => $blogPost['id'],
-				'blog_content_id'	 => $blogPost['blog_content_id'],
-				'view_count'		 => $blogAccess[$this->pluginModelName]['view_count'],
-			)
-		);
-		$saveData	 = Hash::merge($blogAccess, $saveData);
-
-		if (ClassRegistry::isKeySet('PopularBlogPost.PopularBlogPost')) {
-			$PopularBlogPostModel = ClassRegistry::getObject('PopularBlogPost.PopularBlogPost');
+		$data = $PopularBlogPostModel->find('first', array(
+			'conditions' => array(
+				'PopularBlogPost.blog_post_id' => $View->viewVars['post']['BlogPost']['id']
+			),
+			'cache'		 => false,
+			'recursive'	 => -1
+		));
+		if ($data) {
+			$data[$this->pluginModelName]['view_count'] ++;
 		} else {
-			$PopularBlogPostModel = ClassRegistry::init('PopularBlogPost.PopularBlogPost');
+			$data = array(
+				'PopularBlogPost' => array(
+					'blog_post_id'		 => $blogPost['id'],
+					'blog_content_id'	 => $blogPost['blog_content_id'],
+					'view_count'		 => 1,
+				),
+			);
 		}
-		$PopularBlogPostModel->save($saveData, array('validate' => false));
+		$PopularBlogPostModel->save($data, false);
+		$PopularBlogPostModel->commit();
 	}
 
 }
