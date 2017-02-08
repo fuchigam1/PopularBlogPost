@@ -35,15 +35,19 @@ class PopularBlogPostModelEventListener extends BcModelEventListener {
 	 * @param CakeEvent $event
 	 */
 	public function blogBlogPostBeforeFind(CakeEvent $event) {
-		$Model		 = $event->subject();
-		// ブログ記事取得の際に人気記事ランキング表示情報も併せて取得する
-		$association = array(
-			$this->pluginModelName => array(
-				'className'	 => $this->plugin . '.' . $this->pluginModelName,
-				'foreignKey' => 'blog_post_id'
-			)
-		);
-		$Model->bindModel(array('hasOne' => $association));
+		if (!BcUtil::isAdminSystem()) {
+			$Model		 = $event->subject();
+			// ブログ記事取得の際に人気記事ランキング表示情報も併せて取得する
+			// もしなんらかの事故で複数の同一 blog_post_id が発生した場合に、
+			// ブログ記事一覧表示に同一記事が複数表示されるため、フロント側でのみリレーションを張る
+			$association = array(
+				$this->pluginModelName => array(
+					'className'	 => $this->plugin . '.' . $this->pluginModelName,
+					'foreignKey' => 'blog_post_id'
+				)
+			);
+			$Model->bindModel(array('hasOne' => $association));
+		}
 	}
 
 	/**
