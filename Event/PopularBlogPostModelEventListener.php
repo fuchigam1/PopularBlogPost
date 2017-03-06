@@ -65,8 +65,8 @@ class PopularBlogPostModelEventListener extends BcModelEventListener {
 			'recursive'	 => -1
 		));
 		if ($data) {
-			if (!$PopularBlogPostModel->delete($data[$this->pluginModelName]['id'])) {
-				$this->log(sprintf('ID：%s の PopularBlogPost の保存に失敗しました。', $Model->data[$this->pluginModelName]['id']));
+			if (!$PopularBlogPostModel->delete($data['PopularBlogPost']['id'])) {
+				$this->log(sprintf('ID：%s の PopularBlogPost の保存に失敗しました。', $Model->data['PopularBlogPost']['id']));
 			}
 		}
 	}
@@ -91,19 +91,21 @@ class PopularBlogPostModelEventListener extends BcModelEventListener {
 
 	/**
 	 * blogBlogContentAfterDelete
+	 * - ブログ削除時、そのブログが持つPopularBlogPost設定を削除する
 	 * 
 	 * @param CakeEvent $event
 	 */
 	public function blogBlogContentAfterDelete(CakeEvent $event) {
-		$Model	 = $event->subject();
-		// ブログ削除時、そのブログが持つPopularBlogPost設定を削除する
-		$data	 = $Model->PopularBlogPostConfig->find('first', array(
+		$Model = $event->subject();
+
+		$PopularBlogPostConfigModel	 = ClassRegistry::init('PopularBlogPost.PopularBlogPostConfig');
+		$data						 = $PopularBlogPostConfigModel->find('first', array(
 			'conditions' => array('PopularBlogPostConfig.blog_content_id' => $Model->id),
 			'recursive'	 => -1
 		));
 		if ($data) {
-			if (!$Model->PopularBlogPostConfig->delete($data['PopularBlogPostConfig']['id'])) {
-				$this->log(sprintf('ID：%s の' . $this->pluginModelName . '設定の削除に失敗しました。', $data['PopularBlogPostConfig']['id']));
+			if (!$PopularBlogPostConfigModel->delete($data['PopularBlogPostConfig']['id'])) {
+				$this->log(sprintf('ID：%s の PopularBlogPost 設定の削除に失敗しました。', $data['PopularBlogPostConfig']['id']));
 			}
 		}
 	}
