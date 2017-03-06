@@ -52,19 +52,21 @@ class PopularBlogPostModelEventListener extends BcModelEventListener {
 
 	/**
 	 * blogBlogPostAfterDelete
+	 * - ブログ記事削除時、そのブログ記事が持つPopularBlogPostを削除する
 	 * 
 	 * @param CakeEvent $event
 	 */
 	public function blogBlogPostAfterDelete(CakeEvent $event) {
-		$Model	 = $event->subject();
-		// ブログ記事削除時、そのブログ記事が持つPopularBlogPostを削除する
-		$data	 = $Model->{$this->pluginModelName}->find('first', array(
-			'conditions' => array($this->pluginModelName . '.blog_post_id' => $Model->id),
+		$Model = $event->subject();
+
+		$PopularBlogPostModel	 = ClassRegistry::init('PopularBlogPost.PopularBlogPost');
+		$data					 = $PopularBlogPostModel->find('first', array(
+			'conditions' => array('PopularBlogPost.blog_post_id' => $Model->id),
 			'recursive'	 => -1
 		));
 		if ($data) {
-			if (!$Model->{$this->pluginModelName}->delete($data[$this->pluginModelName]['id'])) {
-				$this->log(sprintf('ID：%s の' . $this->pluginModelName . 'の保存に失敗しました。', $Model->data[$this->pluginModelName]['id']));
+			if (!$PopularBlogPostModel->delete($data[$this->pluginModelName]['id'])) {
+				$this->log(sprintf('ID：%s の PopularBlogPost の保存に失敗しました。', $Model->data[$this->pluginModelName]['id']));
 			}
 		}
 	}
