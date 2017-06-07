@@ -25,18 +25,6 @@ class PopularBlogPost extends BcPluginAppModel {
 	public $plugin = 'PopularBlogPost';
 
 	/**
-	 * belongsTo
-	 * 
-	 * @var array
-	 */
-	public $belongsTo = array(
-		'BlogPost' => array(
-			'className'	 => 'Blog.BlogPost',
-			'foreignKey' => 'blog_post_id'
-		)
-	);
-
-	/**
 	 * Validation
 	 *
 	 * @var array
@@ -80,6 +68,24 @@ class PopularBlogPost extends BcPluginAppModel {
 		$data['update_date']	 = date('Y-m-d H:i:s');
 		$this->data[$this->name] = $data;
 		return true;
+	}
+
+	/**
+	 * 人気記事ランキング情報取得の際に、ランキングデータに紐付くブログ記事情報を取得する
+	 * 
+	 * @param array $query
+	 */
+	public function beforeFind($query) {
+		// ブログ記事取得の際に人気記事ランキング表示情報も併せて取得する
+		$association = array(
+			'BlogPost' => array(
+				'className'	 => 'Blog.BlogPost',
+				'foreignKey' => 'blog_post_id',
+			)
+		);
+		$this->bindModel(array('belongsTo' => $association));
+
+		parent::beforeFind($query);
 	}
 
 }

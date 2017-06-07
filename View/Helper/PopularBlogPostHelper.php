@@ -77,10 +77,17 @@ class PopularBlogPostHelper extends AppHelper {
 
 		$datas = $PopularBlogPost->find('all', $conditions);
 		if ($datas) {
-			$dataList = array();
+			$dataList		 = array();
+			$BlogPostModel	 = ClassRegistry::init('Blog.BlogPost');
 			foreach ($datas as $data) {
 				if (Hash::get($data, 'BlogPost.id')) {
-					$dataList[] = $data;
+					$blogPost	 = $BlogPostModel->find('first', array(
+						'conditions' => array(
+							'BlogPost.id' => $data['BlogPost']['id'],
+						),
+						'recursive'	 => 0,
+					));
+					$dataList[]	 = $blogPost;
 				}
 			}
 			return $dataList;

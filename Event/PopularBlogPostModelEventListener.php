@@ -38,8 +38,6 @@ class PopularBlogPostModelEventListener extends BcModelEventListener {
 		if (!BcUtil::isAdminSystem()) {
 			$Model		 = $event->subject();
 			// ブログ記事取得の際に人気記事ランキング表示情報も併せて取得する
-			// もしなんらかの事故で複数の同一 blog_post_id が発生した場合に、
-			// ブログ記事一覧表示に同一記事が複数表示されるため、フロント側でのみリレーションを張る
 			$association = array(
 				$this->pluginModelName => array(
 					'className'	 => $this->plugin . '.' . $this->pluginModelName,
@@ -62,7 +60,8 @@ class PopularBlogPostModelEventListener extends BcModelEventListener {
 		$PopularBlogPostModel	 = ClassRegistry::init('PopularBlogPost.PopularBlogPost');
 		$data					 = $PopularBlogPostModel->find('first', array(
 			'conditions' => array('PopularBlogPost.blog_post_id' => $Model->id),
-			'recursive'	 => -1
+			'recursive'	 => -1,
+			'callbackes' => false,
 		));
 		if ($data) {
 			if (!$PopularBlogPostModel->delete($data['PopularBlogPost']['id'])) {
@@ -101,7 +100,8 @@ class PopularBlogPostModelEventListener extends BcModelEventListener {
 		$PopularBlogPostConfigModel	 = ClassRegistry::init('PopularBlogPost.PopularBlogPostConfig');
 		$data						 = $PopularBlogPostConfigModel->find('first', array(
 			'conditions' => array('PopularBlogPostConfig.blog_content_id' => $Model->id),
-			'recursive'	 => -1
+			'recursive'	 => -1,
+			'callbacks'	 => false,
 		));
 		if ($data) {
 			if (!$PopularBlogPostConfigModel->delete($data['PopularBlogPostConfig']['id'])) {
